@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EMG — منشئ بروميتات الذكاء الاصطناعي</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- ============ الشريط العلوي ============ -->
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-mark">EMG</div>
+        <div class="brand-text">
+          <div class="brand-name">EMG</div>
+          <div class="brand-sub">منشئ بروميتات الذكاء الاصطناعي</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="icon-btn" id="btnHistory" role="button" tabindex="0" title="السجل" aria-label="السجل">🕐</div>
+        <div class="icon-btn" id="btnFavorites" role="button" tabindex="0" title="المفضلة" aria-label="المفضلة">★</div>
+        <div class="icon-btn" id="btnSettings" role="button" tabindex="0" title="الإعدادات" aria-label="الإعدادات">⚙</div>
+      </div>
+    </div>
+
+    <!-- ============ العرض الرئيسي ============ -->
+    <div id="mainView" class="view">
+
+      <!-- تبويبات الخطوات -->
+      <div class="wz-tabs" role="tablist">
+        <div class="wz-tab active" id="tab-idea" data-tab="idea" role="button" tabindex="0"><span class="wz-num">١</span><span>الفكرة</span></div>
+        <div class="wz-tab" id="tab-details" data-tab="details" role="button" tabindex="0"><span class="wz-num">٢</span><span>التفاصيل</span></div>
+        <div class="wz-tab" id="tab-style" data-tab="style" role="button" tabindex="0"><span class="wz-num">٣</span><span>الأسلوب</span></div>
+        <div class="wz-tab" id="tab-result" data-tab="result" role="button" tabindex="0"><span class="wz-num">٤</span><span>النتيجة</span></div>
+      </div>
+
+      <div class="scroll" id="mainScroll">
+
+        <!-- ═══════ ١ · الفكرة ═══════ -->
+        <div class="wz-pane" id="pane-idea">
+          <div class="card main-idea-card">
+            <div class="card-title">✍️ الفكرة الرئيسية</div>
+            <textarea id="mainIdea" dir="auto" rows="3" placeholder="مثال: رجل يقف أمام شاشة يرتدي ملابس إحرام" aria-label="الفكرة الرئيسية"></textarea>
+            <div class="tip-text">جملة واحدة تمثل جوهر الصورة، والباقي يُبنى حولها.</div>
+          </div>
+
+          <div class="card story-card">
+            <div class="card-title">🎯 قصة الصورة / الهدف منها</div>
+            <textarea id="imageStory" dir="auto" rows="2" placeholder="مثال: إعلان لعلامة ملابس فاخرة يبرز الثقة والهدوء، ويستهدف الشباب" aria-label="قصة الصورة"></textarea>
+            <div class="tip-text">اكتب الهدف من الصورة، يساعد المحرك يختار التكوين والإضاءة والتعبير اللي يخدمه.</div>
+          </div>
+
+          <div class="segmented" role="tablist" aria-label="وضع البروميت">
+            <div class="seg active" id="modeGeneration" role="button" tabindex="0" title="إنشاء صورة جديدة من الصفر">توليد</div>
+            <div class="seg" id="modeEditing" role="button" tabindex="0" title="تعديل صورة مرجعية — غيّر المطلوب فقط">تعديل</div>
+          </div>
+
+          <div id="sec-idea"></div>
+
+          <div class="card smart-card collapsible collapsed" id="smartCard">
+            <div class="card-head" data-toggle="smartCard">
+              <div class="card-title">✨ المنطق الذكي</div>
+              <div class="chev-toggle">▾</div>
+            </div>
+            <div class="card-body">
+              <textarea id="smartText" dir="auto" placeholder="مثال: خليه واقف قدام عربية بالليل" aria-label="المنطق الذكي"></textarea>
+              <div class="btn-row small">
+                <div class="btn primary" id="btnSmart" role="button" tabindex="0">✨ حوّل لبروميت</div>
+                <div class="btn ghost" id="btnSmartToFields" role="button" tabindex="0">استخرج لحقول</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card preset-card">
+            <div class="card-title">📁 القوالب الجاهزة</div>
+            <div class="tip-text">ابدأ من إعداد جاهز أو احفظ إعدادك الحالي.</div>
+            <select id="presetSelect" aria-label="اختر إعداداً محفوظاً"></select>
+            <div class="btn-row small">
+              <div class="btn primary" id="btnPresetLoad" role="button" tabindex="0">تحميل</div>
+              <div class="btn ghost" id="btnPresetSave" role="button" tabindex="0">حفظ</div>
+              <div class="btn ghost" id="btnPresetRename" role="button" tabindex="0">تسمية</div>
+              <div class="btn ghost danger" id="btnPresetDelete" role="button" tabindex="0">حذف</div>
+            </div>
+            <div class="btn-row small">
+              <div class="btn ghost" id="btnPresetExport" role="button" tabindex="0">⬆ تصدير</div>
+              <div class="btn ghost" id="btnPresetImport" role="button" tabindex="0">⬇ استيراد</div>
+            </div>
+          </div>
+
+          <div class="next-btn" data-go="details" role="button" tabindex="0">التالي: التفاصيل ←</div>
+        </div>
+
+        <!-- ═══════ ٢ · التفاصيل ═══════ -->
+        <div class="wz-pane hidden" id="pane-details">
+          <div id="sec-details"></div>
+          <div class="next-btn" data-go="style" role="button" tabindex="0">التالي: الأسلوب ←</div>
+        </div>
+
+        <!-- ═══════ ٣ · الأسلوب ═══════ -->
+        <div class="wz-pane hidden" id="pane-style">
+          <div class="card design-card collapsible collapsed" id="designCard">
+            <div class="card-head" data-toggle="designCard">
+              <div class="card-title">🎨 استوديو الأفكار الإعلانية</div>
+              <div class="chev-toggle">▾</div>
+            </div>
+            <div class="card-body">
+              <div class="tip-text">اختر نوعاً أساسياً (○) وأنواعاً متوافقة (+).</div>
+              <div id="designStudio"></div>
+            </div>
+          </div>
+          <div id="sec-style"></div>
+          <div class="next-btn" data-go="result" role="button" tabindex="0">التالي: النتيجة ←</div>
+        </div>
+
+        <!-- ═══════ ٤ · النتيجة ═══════ -->
+        <div class="wz-pane hidden" id="pane-result">
+          <div class="card compose-card">
+            <div class="pv-bar">
+              <div class="card-title">معاينة التكوين النهائية</div>
+              <div class="pv-toggle" id="pvToggle" role="button" tabindex="0">إخفاء المعاينة</div>
+            </div>
+            <div id="pvBody">
+              <div class="pv-modes">
+                <div class="pv-mode active" data-pvmode="natural" role="button" tabindex="0" title="عرض طبيعي بالإضاءة والخامات">طبيعي</div>
+                <div class="pv-mode" data-pvmode="diag" role="button" tabindex="0" title="الأحمر للمناطق المضاءة والأخضر للظلال">ضوء وظل</div>
+                <div class="pv-mode" data-pvmode="shadow" role="button" tabindex="0" title="الظلال فقط على خامة رمادية محايدة">ظلال فقط</div>
+              </div>
+              <div class="pv-row">
+                <label class="pv-label" for="pvStrength">شدة العرض التشخيصي (لا تغيّر الإضاءة الفعلية)</label>
+                <input type="range" id="pvStrength" min="15" max="100" value="70" />
+              </div>
+              <label class="pv-chk"><input type="checkbox" id="pvGuides" /> خطوط التكوين (للمساعدة فقط، لا تدخل البرومبت)</label>
+              <div id="composePreview"></div>
+              <div class="pv-reset" id="pvReset" role="button" tabindex="0">إعادة ضبط المعاينة</div>
+            </div>
+          </div>
+
+          <div class="card output-card" id="outputCard">
+            <div class="card-title-row">
+              <div class="card-title">البروميت الناتج</div>
+              <div class="char-count" id="charCount"></div>
+            </div>
+            <div class="opt-row">
+              <div class="opt-col">
+                <label class="opt-label">🎯 موديل الهدف</label>
+                <select id="targetModel" aria-label="موديل الهدف">
+                  <option value="Universal">عام</option>
+                  <option value="Midjourney">Midjourney</option>
+                  <option value="Flux">Flux</option>
+                  <option value="Stable Diffusion XL">Stable Diffusion XL</option>
+                  <option value="DALL-E 3">DALL-E 3</option>
+                  <option value="Nano Banana / GPT Image">Nano Banana / GPT Image</option>
+                </select>
+              </div>
+              <div class="opt-col">
+                <label class="opt-label">📋 صيغة النسخ</label>
+                <select id="copyFormat" aria-label="صيغة النسخ">
+                  <option value="prompt">البروميت فقط</option>
+                  <option value="negative">السلبي فقط</option>
+                  <option value="both">البروميت + السلبي</option>
+                  <option value="json">JSON</option>
+                </select>
+              </div>
+            </div>
+            <div id="warnings" class="warnings hidden"></div>
+            <textarea id="output" dir="ltr" placeholder="اضغط «توليد البروميت» في الأسفل. يمكنك تعديله بحرية — النسخ يستخدم نصك المعدّل." aria-label="البروميت المولد"></textarea>
+            <div class="btn-row small">
+              <div class="btn ghost" id="btnOutCopy" role="button" tabindex="0">نسخ</div>
+              <div class="btn ghost" id="btnOutEdit" role="button" tabindex="0">تعديل</div>
+              <div class="btn ghost" id="btnOutRegen" role="button" tabindex="0">إعادة توليد</div>
+            </div>
+            <div class="btn-row small">
+              <div class="btn ghost" id="btnOutFav" role="button" tabindex="0">★ للمفضلة</div>
+              <div class="btn ghost" id="btnOutHistory" role="button" tabindex="0">حفظ في السجل</div>
+            </div>
+          </div>
+          <div class="footnote">لا تُرسل أي صورة إلى أي مكان. لا يوجد موديل يضمن تطابق الهوية 100%.</div>
+          <div class="next-btn" data-go="style" role="button" tabindex="0">→ السابق: الأسلوب</div>
+        </div>
+
+      </div>
+
+      <!-- أزرار ثابتة أسفل الشاشة -->
+      <div class="actions">
+        <div class="btn primary full" id="btnGenerate" role="button" tabindex="0" title="توليد البروميت (Ctrl/Cmd + Enter)">✨ توليد البروميت</div>
+        <div class="btn-row small">
+          <div class="btn" id="btnCopy" role="button" tabindex="0">📋 نسخ</div>
+          <div class="btn" id="btnRandom" role="button" tabindex="0">🎲 عشوائي ذكي</div>
+          <div class="btn danger" id="btnClear" role="button" tabindex="0">🗑 مسح</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ شاشة المكتبة (السجل / المفضلة / الإعدادات) ============ -->
+    <div id="libraryView" class="view hidden">
+      <div class="lib-header">
+        <div class="btn ghost" id="btnBack" role="button" tabindex="0">→ رجوع</div>
+        <div class="tabs">
+          <div class="tab" id="tabHistory" role="button" tabindex="0">السجل</div>
+          <div class="tab" id="tabFavorites" role="button" tabindex="0">المفضلة</div>
+          <div class="tab" id="tabSettings" role="button" tabindex="0">الإعدادات</div>
+        </div>
+      </div>
+      <div class="scroll" id="libraryContent"></div>
+    </div>
+
+    <!-- ============ النافذة المنبثقة ============ -->
+    <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modal-box">
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="modal-msg" id="modalMsg"></div>
+        <input type="text" id="modalInput" class="hidden" />
+        <div class="btn-row">
+          <div class="btn ghost" id="modalCancel" role="button" tabindex="0">إلغاء</div>
+          <div class="btn primary" id="modalOk" role="button" tabindex="0">موافق</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+  </div>
+
+  <!-- الوحدات (سكربتات بسيطة، ترتيب التحميل مهم) -->
+  <script src="js/schema.js"></script>
+  <script src="js/storageManager.js"></script>
+  <script src="js/promptEngine.js"></script>
+  <script src="js/spatialEngine.js"></script>
+  <script src="js/vendor/three.bundle.js"></script>
+  <script src="js/models3d.js"></script>
+  <script src="js/scene3d.js"></script>
+  <script src="js/compositionPreview.js"></script>
+  <script src="js/designLibrary.js"></script>
+  <script src="js/presetManager.js"></script>
+  <script src="js/historyManager.js"></script>
+  <script src="js/randomizer.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
